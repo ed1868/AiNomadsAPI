@@ -354,7 +354,12 @@ router.get('/', (req, res, next) => {
     console.log("PULLING ALL TOKEN EMAIL SIGNUPS...");
 
     TokenWaitList.find({}).then(payload => {
-        console.log('PULLED USERS : ', payload);
+      if(payload.length < 1){
+        return res.status(500).json({ message: `NO TOKEN WISHLIST USERS HAVE BEEN FOUND` });
+      }else{
+        return res.status(200).json({ users: payload})
+      }
+        
     }).catch(err => {
         if (err) {
             console.log("ERROR : ", err);

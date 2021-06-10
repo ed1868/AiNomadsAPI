@@ -47,6 +47,11 @@ router.get('/', (req, res, next) => {
 
     User.find({}).then(payload => {
         console.log('PULLED USERS : ', payload);
+        if(payload.length < 1){
+            return res.status(500).json({ message: `NO USERS HAVE BEEN FOUND` });
+        }else{
+            return res.status(200).json({ users: payload})
+        }
     }).catch(err => {
         if (err) {
             console.log("ERROR : ", err);
@@ -56,7 +61,12 @@ router.get('/', (req, res, next) => {
 
     console.log("PULLING MESSAGES..");
     Message.find({}).then(payload => {
-        console.log('PULLED MESSAGES : ', payload);
+        
+        if(payload.length < 1){
+            console.log('NO USER FOUND');
+        }else{
+            console.log('PULLED MESSAGES : ', payload);
+        }
     }).catch(err => {
         if (err) {
             console.log("ERROR : ", err)

@@ -1,11 +1,12 @@
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const router = express.Router()
+// isLoggedIn
 
-router.get('/secret', isLoggedIn, (req, res, next) => {
+router.get('/secret', (req, res, next) => {
   res.json({
-    secret: 42,
-    user: req.user,
+    secret: `GOD MODE ACTIVATED`,
+    user: `AI NOMAD`,
   })
 })
 

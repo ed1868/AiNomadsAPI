@@ -24,15 +24,25 @@ const app = express()
 app.use(nocache())
 
 // Set "Access-Control-Allow-Origin" header
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      cb(null, process.env.NODE_ENV !== 'production')
-    },
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
-)
+// app.use(
+//   cors({
+//     origin: (origin, cb) => {
+//       cb(null, process.env.NODE_ENV !== 'production')
+//     },
+//     optionsSuccessStatus: 200,
+//     credentials: true,
+//   })
+// )
+
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+
+
+
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
